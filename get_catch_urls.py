@@ -7,8 +7,8 @@ import requests
 
 # %%
 
-AREA_ID = 1148  # 水の広場公園
-# AREA_ID = 1150  # 有明西ふ頭公園
+# AREA_ID = 1148  # 水の広場公園
+AREA_ID = 1150  # 有明西ふ頭公園
 DATE_OLDER_LIMIT = "2020-05-01"  # 3年間くらい取得
 
 headers = {
@@ -37,6 +37,7 @@ fish_ids = []
 fish_names = []
 sizes = []
 lures = []
+weathers = []
 
 page_id = 1
 while True:
@@ -56,6 +57,7 @@ while True:
             fish_name = result["fish"]["name"]
             size = result["size"]
             lure = result["lure_details"]
+            weather = result["weather"]
 
             catch_ids.append(catch_id)
             caught_ats.append(caught_at)
@@ -67,6 +69,7 @@ while True:
             fish_names.append(fish_name)
             sizes.append(size)
             lures.append(lure)
+            weathers.append(weather)
 
         except KeyError:
             pass
@@ -89,6 +92,7 @@ data = {
     "fish_name": fish_names,
     "size": sizes,
     "lure": lures,
+    "weather": weathers,
 }
 
 df = pd.DataFrame(data)
